@@ -1,4 +1,4 @@
-import sequential, unittest
+import sequential, unittest, jieba
 
 class TestSplitMethods(unittest.TestCase):
 
@@ -9,10 +9,17 @@ class TestSplitMethods(unittest.TestCase):
 
     def test_arrray(self):
         array = ["f, s,f ", "ff, sdf"]
-        result = ["f,", " s,", "f ", "ff," " sdf"]
+        result = ["f,", " s,", "f ", "ff,", " sdf"]
         self.assertEqual(sequential.arraySplit(array, ","), result)
 
     def test_split(self):
         sentence = "这是一首简单的小情歌，唱着人们心肠的曲折。"
         result = ['这是一首简单的小情歌', '唱着人们心肠的曲折。']
         self.assertEqual(sentence.split("，"), result)
+
+    def test_jieba(self):
+        sentence = "这是一首简单的小情歌，唱着人们心肠的曲折。"
+        # print(jieba.cut(sentence))
+        pieces = jieba.cut(sentence)
+        for piece in pieces:
+            print(piece)
